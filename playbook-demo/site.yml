@@ -1,0 +1,43 @@
+---
+- name: Install and configure httpd
+  hosts: learn
+  become: yes
+  tasks:
+    - name: Install httpd & firewalld
+      yum:
+        name:
+          - httpd
+          - firewalld
+        state: latest
+    - name: Enable and Start httpd
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+    - name : Enable and start Firewalld
+      service:
+        name: firewalld
+        enabled: yes
+        state: started
+    - name: Open firewalld
+      firewalld: 
+        service: http
+        permanent: yes 
+        state: enabled
+        immediate: yes
+    - name: Copy html contents
+      copy:
+        content: "Welcome to our website <br>(This is deployed using Ansible)"
+        dest: /var/www/html/index.html 
+- name: Test and verify webserver
+  hosts: localhost
+  become: no
+  tasks:
+    - name: Connect to the webserver
+      uri:
+        url: http://node1
+        status_code: 200
+        return_content: true
+
+
+

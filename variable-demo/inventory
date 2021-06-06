@@ -1,0 +1,6 @@
+[myself]
+localhost ansible_connection=local
+
+[nodes]
+node1
+node2

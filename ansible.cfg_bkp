@@ -1,0 +1,22 @@
+[Default]
+#inventory file location
+inventory = ./inventory
+
+#which user credential ansible has to use to connect to host
+remote_user = vagrant
+
+#whether it it should ask for "someuser" password
+ask_pass = false
+
+[privilege_escalation]
+#enable privilege escalation
+become = true
+
+#set to use sudo for privilege escalation
+become_method = sudo
+
+#priviledge escalation user
+become_user = devops
+
+#enable promoting for the privilege escalation password
+become_ask_pass = false
